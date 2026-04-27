@@ -86,11 +86,12 @@ export interface Database {
       rhythms: {
         Row: {
           id: string;
-          family_id: string;
+          family_id: string | null;
           name: string;
           description: string | null;
           day_type: string;
           is_active: boolean;
+          is_template: boolean;
           sort_order: number;
           created_at: string;
           updated_at: string;

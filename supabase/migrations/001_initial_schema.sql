@@ -87,14 +87,16 @@ create table children (
 -- rhythms
 create table rhythms (
   id          uuid primary key default uuid_generate_v4(),
-  family_id   uuid not null references families(id) on delete cascade,
+  family_id   uuid references families(id) on delete cascade, -- null = global template
   name        text not null,
   description text,
   day_type    text not null default 'weekday',
   is_active   boolean not null default true,
+  is_template boolean not null default false,
   sort_order  integer not null default 0,
   created_at  timestamptz not null default now(),
-  updated_at  timestamptz not null default now()
+  updated_at  timestamptz not null default now(),
+  constraint rhythms_owner_check check (family_id is not null or is_template = true)
 );
 
 -- activities
@@ -243,7 +245,8 @@ create or replace function auth_family_id() returns uuid language sql stable as 
   select family_id from users where id = auth.uid()
 $$;
 
--- families: members of the family can read/update their own family record
+-- families: any authenticated user can create a family (needed during signup before user row exists)
+create policy "family_insert" on families for insert with check (auth.uid() is not null);
 create policy "family_read"   on families for select using (id = auth_family_id());
 create policy "family_update" on families for update using (id = auth_family_id());
 
@@ -258,11 +261,12 @@ create policy "children_write"  on children for insert with check (family_id = a
 create policy "children_update" on children for update using (family_id = auth_family_id());
 create policy "children_delete" on children for delete using (family_id = auth_family_id());
 
--- rhythms: own family only
-create policy "rhythms_read"   on rhythms for select using (family_id = auth_family_id());
-create policy "rhythms_insert" on rhythms for insert with check (family_id = auth_family_id());
-create policy "rhythms_update" on rhythms for update using (family_id = auth_family_id());
-create policy "rhythms_delete" on rhythms for delete using (family_id = auth_family_id());
+-- rhythms: templates are public read; family rhythms are scoped
+create policy "rhythms_read_templates" on rhythms for select using (is_template = true);
+create policy "rhythms_read_family"    on rhythms for select using (family_id = auth_family_id());
+create policy "rhythms_insert"         on rhythms for insert with check (family_id = auth_family_id());
+create policy "rhythms_update"         on rhythms for update using (family_id = auth_family_id());
+create policy "rhythms_delete"         on rhythms for delete using (family_id = auth_family_id());
 
 -- rhythm_blocks: accessible if user owns the parent rhythm
 create policy "rhythm_blocks_read" on rhythm_blocks for select

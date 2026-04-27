@@ -27,11 +27,12 @@ export default appSchema({
     tableSchema({
       name: 'rhythms',
       columns: [
-        { name: 'family_id', type: 'string', isIndexed: true },
+        { name: 'family_id', type: 'string', isOptional: true, isIndexed: true },
         { name: 'name', type: 'string' },
         { name: 'description', type: 'string', isOptional: true },
         { name: 'day_type', type: 'string' },
         { name: 'is_active', type: 'boolean' },
+        { name: 'is_template', type: 'boolean' },
         { name: 'sort_order', type: 'number' },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },

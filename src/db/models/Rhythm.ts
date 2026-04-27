@@ -9,11 +9,12 @@ export class Rhythm extends Model {
     rhythm_blocks: { type: 'has_many' as const, foreignKey: 'rhythm_id' },
   };
 
-  @field('family_id') familyId!: string;
+  @field('family_id') familyId!: string | null;
   @field('name') name!: string;
   @field('description') description!: string | null;
   @field('day_type') dayType!: string;
   @field('is_active') isActive!: boolean;
+  @field('is_template') isTemplate!: boolean;
   @field('sort_order') sortOrder!: number;
   @readonly @date('created_at') createdAt!: Date;
   @readonly @date('updated_at') updatedAt!: Date;
