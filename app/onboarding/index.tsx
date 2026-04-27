@@ -30,7 +30,7 @@ const SLIDES = [
   {
     key: '4',
     emoji: '🧒',
-    title: 'Ezra's own view',
+    title: "Ezra's own view",
     body: 'A giant, picture-first mode your child can use semi-independently.',
   },
 ];
