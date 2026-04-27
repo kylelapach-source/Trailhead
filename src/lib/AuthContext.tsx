@@ -46,16 +46,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function loadFamilyProfile(userId: string) {
-    const { data } = await supabase
+    const { data: userRow } = await supabase
       .from('users')
-      .select('family_id, families(id, name, timezone, locale)')
+      .select('family_id')
       .eq('id', userId)
       .single();
 
-    if (data?.families) {
-      const fam = Array.isArray(data.families) ? data.families[0] : data.families;
-      setFamilyProfile(fam as FamilyProfile);
-    }
+    if (!userRow?.family_id) return;
+
+    const { data: fam } = await supabase
+      .from('families')
+      .select('id, name, timezone, locale')
+      .eq('id', userRow.family_id)
+      .single();
+
+    if (fam) setFamilyProfile(fam);
   }
 
   async function signIn(email: string, password: string) {

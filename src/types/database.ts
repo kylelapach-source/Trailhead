@@ -51,6 +51,7 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Database['public']['Tables']['families']['Insert']>;
+        Relationships: [];
       };
       users: {
         Row: {
@@ -66,6 +67,7 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Database['public']['Tables']['users']['Insert']>;
+        Relationships: [];
       };
       children: {
         Row: {
@@ -82,6 +84,7 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Database['public']['Tables']['children']['Insert']>;
+        Relationships: [];
       };
       rhythms: {
         Row: {
@@ -102,6 +105,7 @@ export interface Database {
           updated_at?: string;
         };
         Update: Partial<Database['public']['Tables']['rhythms']['Insert']>;
+        Relationships: [];
       };
       rhythm_blocks: {
         Row: {
@@ -123,6 +127,7 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Database['public']['Tables']['rhythm_blocks']['Insert']>;
+        Relationships: [];
       };
       activities: {
         Row: {
@@ -146,6 +151,7 @@ export interface Database {
           updated_at?: string;
         };
         Update: Partial<Database['public']['Tables']['activities']['Insert']>;
+        Relationships: [];
       };
       logs: {
         Row: {
@@ -169,6 +175,7 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Database['public']['Tables']['logs']['Insert']>;
+        Relationships: [];
       };
       media_items: {
         Row: {
@@ -188,6 +195,7 @@ export interface Database {
           play_count?: number;
         };
         Update: Partial<Database['public']['Tables']['media_items']['Insert']>;
+        Relationships: [];
       };
       reflections: {
         Row: {
@@ -207,6 +215,7 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Database['public']['Tables']['reflections']['Insert']>;
+        Relationships: [];
       };
       sync_conflicts: {
         Row: {
@@ -221,6 +230,7 @@ export interface Database {
         };
         Insert: Omit<Database['public']['Tables']['sync_conflicts']['Row'], 'id'> & { id?: string };
         Update: Partial<Database['public']['Tables']['sync_conflicts']['Insert']>;
+        Relationships: [];
       };
     };
     Views: Record<string, never>;

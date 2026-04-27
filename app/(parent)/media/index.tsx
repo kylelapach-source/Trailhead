@@ -125,7 +125,7 @@ export default function MediaLibraryScreen() {
                 borderRadius="s"
                 alignItems="center"
                 justifyContent="center"
-                style={{ backgroundColor: theme.colors.slate800 }}
+                style={{ backgroundColor: '#1A1A2E' }}
               >
                 <Ionicons name="play-circle" size={28} color="#fff" />
               </Box>

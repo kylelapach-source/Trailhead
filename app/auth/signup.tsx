@@ -49,6 +49,7 @@ export default function SignupScreen() {
               email: user.email!,
               display_name: displayName.trim(),
               role: 'parent',
+              avatar_url: null,
             });
         }
       }

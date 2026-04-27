@@ -55,7 +55,7 @@ export default function ChildViewScreen() {
 
   useEffect(() => {
     speakCurrentBlock();
-    return () => Speech.stop();
+    return () => { Speech.stop(); };
   }, [currentBlock.id]);
 
   function speakCurrentBlock() {
@@ -135,7 +135,6 @@ export default function ChildViewScreen() {
                 : b.id === currentBlock.id
                 ? theme.colors.primary
                 : theme.colors.border,
-              transition: 'width 0.3s',
             }}
           />
         ))}
