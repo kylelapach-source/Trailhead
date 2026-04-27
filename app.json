@@ -1,0 +1,72 @@
+{
+  "expo": {
+    "name": "Trailhead",
+    "slug": "trailhead",
+    "version": "1.0.0",
+    "scheme": "trailhead",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FEFAE0"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.trailheadhome",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Trailhead uses your camera to capture learning moments.",
+        "NSPhotoLibraryUsageDescription": "Trailhead accesses your photos to attach them to activity logs.",
+        "NSMicrophoneUsageDescription": "Trailhead records voice memos and child reflections.",
+        "NSSpeechRecognitionUsageDescription": "Trailhead transcribes voice memos for your journal."
+      }
+    },
+    "android": {
+      "package": "app.trailheadhome",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#2D6A4F"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "RECORD_AUDIO",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        { "cameraPermission": "Trailhead uses your camera to capture learning moments." }
+      ],
+      [
+        "expo-image-picker",
+        { "photosPermission": "Trailhead accesses your photos to attach them to activity logs." }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#2D6A4F",
+          "sounds": []
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
