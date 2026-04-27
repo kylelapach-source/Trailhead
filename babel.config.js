@@ -13,8 +13,8 @@ module.exports = function (api) {
           },
         },
       ],
-      // Reanimated plugin must be last; skip in Jest to avoid native module issues
-      ...(isTest ? [] : ['react-native-reanimated/plugin']),
+      // Worklets plugin replaces reanimated/plugin in reanimated v4; skip in Jest
+      ...(isTest ? [] : ['react-native-worklets/plugin']),
     ],
   };
 };
