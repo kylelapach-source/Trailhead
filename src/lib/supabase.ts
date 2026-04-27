@@ -10,24 +10,25 @@ const supabaseKey =
   process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ??
   '';
 
-// SecureStore adapter — web falls back to localStorage
+// SecureStore adapter — web falls back to localStorage; SSR (Node) returns null
 const ExpoSecureStoreAdapter = {
   getItem: (key: string) => {
     if (Platform.OS === 'web') {
+      if (typeof localStorage === 'undefined') return Promise.resolve(null);
       return Promise.resolve(localStorage.getItem(key));
     }
     return SecureStore.getItemAsync(key);
   },
   setItem: (key: string, value: string) => {
     if (Platform.OS === 'web') {
-      localStorage.setItem(key, value);
+      if (typeof localStorage !== 'undefined') localStorage.setItem(key, value);
       return Promise.resolve();
     }
     return SecureStore.setItemAsync(key, value);
   },
   removeItem: (key: string) => {
     if (Platform.OS === 'web') {
-      localStorage.removeItem(key);
+      if (typeof localStorage !== 'undefined') localStorage.removeItem(key);
       return Promise.resolve();
     }
     return SecureStore.deleteItemAsync(key);
