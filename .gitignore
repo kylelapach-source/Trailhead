@@ -43,3 +43,6 @@ yarn-error.*
 # Secrets
 google-service-account.json
 .env
+
+# Test output
+coverage/
